@@ -56,6 +56,11 @@ function Draw3DText(x,y,z, text)
     DrawRect(_x, _y + 0.0125, 0.015 + factor, 0.03, 41, 11, 41, 68)
 end
 
+
+-- END OF FUNCTIONS
+-- EVENTS BEGIN
+
+
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded')
 AddEventHandler('QBCore:Client:OnPlayerLoaded', function(xPlayer)
   PlayerData = xPlayer   
