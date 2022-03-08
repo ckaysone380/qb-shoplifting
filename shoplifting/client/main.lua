@@ -1,9 +1,10 @@
 local QBCore = exports['qb-core']:GetCoreObject()
-
+-- Variables
 
 local PlayerData = {}
 local coolDown = false
 
+-- BEGINING OF FUNCTIONS
 
 function DrawMissionText(text, height, length)
     SetTextScale(0.5, 0.5)
@@ -125,7 +126,7 @@ CreateThread(function()
 		for _,p in pairs(Config.Positions) do
 			if p.coolDown > 0 then
 				p.coolDown = p.coolDown - 1
-				print(p.coolDown)
+				print(p.coolDown) -- Prints out the cooldown left to Client 
 			end
 		end
 	end
