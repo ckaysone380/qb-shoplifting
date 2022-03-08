@@ -44,51 +44,6 @@ AddEventHandler('qb-shoplifting:client:doStuff', function()
 end)
 
 
-RegisterNetEvent('qb-shoplifting:client:robberyCall', function(type, key, streetLabel, coords)
-    if PlayerJob.name == "police" and onDuty then
-        PlaySound(-1, "Lose_1st", "GTAO_FM_Events_Soundset", 0, 0, 1)
-        TriggerEvent('qb-policealerts:client:AddPoliceAlert', {
-            timeOut = 5000,
-            alertTitle = "10-31 | Shop Lifter",
-            coords = {
-                x = coords.x,
-                y = coords.y,
-                z = coords.z,
-            },
-            details = {
-                [1] = {
-                    icon = '<i class="fas fa-globe-europe"></i>',
-                    detail = streetLabel,
-                },
-            },
-            callSign = QBCore.Functions.GetPlayerData().metadata["callsign"],
-        })
-
-        local transG = 250
-        local blip = AddBlipForCoord(coords.x, coords.y, coords.z)
-        SetBlipSprite(blip, 458)
-        SetBlipColour(blip, 1)
-        SetBlipDisplay(blip, 4)
-        SetBlipAlpha(blip, transG)
-        SetBlipScale(blip, 1.0)
-        BeginTextCommandSetBlipName('STRING')
-        AddTextComponentString("10-31 | Shop Lifter")
-        EndTextCommandSetBlipName(blip)
-        while transG ~= 0 do
-            Wait(180 * 4)
-            transG = transG - 1
-            SetBlipAlpha(blip, transG)
-            if transG == 0 then
-                SetBlipSprite(blip, 2)
-                RemoveBlip(blip)
-                return
-            end
-        end
-    end
-end)
-
-    
-
 
 CreateThread(function()
     while true do
