@@ -16,7 +16,7 @@ Config.RewardItems = {
     {label = 'Rolling Paper', item = 'rolling_paper'},
 }
 
-Config.CoolDownTimer = 250
+Config.CoolDownTimer = 10
 Config.Positions = {
     {x = 1157.537109375, y = -324.0290222168, z = 69.205055236816, coolDown = 0},
     {x = 1157.6760253906, y = -321.11770629883, z = 69.205146789551, coolDown = 0},
