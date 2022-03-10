@@ -7,14 +7,29 @@ local GlobalTimer = 0
 local completedJob = false
 local firstComplete = false
 
+
 -- EVENTS BEGIN
 
 RegisterNetEvent('qb-shoplifting:client:doStuff')
-AddEventHandler('qb-shoplifting:client:doStuff', function()
+AddEventHandler('qb-shoplifting:client:doStuff', function(coords)
+    local pos = GetEntityCoords(PlayerPedId())
+    local s1, s2 = GetStreetNameAtCoord(pos.x, pos.y, pos.z)
+    local street1 = GetStreetNameFromHashKey(s1)
+    local street2 = GetStreetNameFromHashKey(s2)
+    local streetLabel = street1
+    if street2 ~= nil then
+    streetLabel = streetLabel .. " " .. street2
+    end
     local ped = PlayerPedId()
+    local alertData = {
+        title = "10-33 | Shoplifter",
+        coords = coords,
+        description = "Someone Is Trying To Shoplift At "..streetLabel.. " "
+    }
+
     if GlobalTimer == 0 then
 
-        QBCore.Functions.Progressbar('shopliftbar', 'Shoplifting...', 5000, false, true, { -- Name | Label | Time | useWhileDead | canCancel
+        QBCore.Functions.Progressbar('shopliftbar', 'Shoplifting...', 5000, false, true, {
             disableMovement = true,
             disableCarMovement = true,
             disableMouse = false,
@@ -27,11 +42,12 @@ AddEventHandler('qb-shoplifting:client:doStuff', function()
         function() -- Play When Done
             completedJob = true
             firstComplete = true
-        end, 
-
-        function() -- Play When Cancel
-
+                TriggerServerEvent('qb-shoplifting:server:sendAlert', alertData, streetLabel, coords)
         end)
+
+        function sWord() -- Play When Cancel
+            QBCore.Functions.Notify('You Stopped Shoplifting', 'error', 5000) 
+        end
         Wait(5000)
         ClearPedTasks(ped)
         FreezeEntityPosition(player, false)

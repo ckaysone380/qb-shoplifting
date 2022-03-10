@@ -11,3 +11,7 @@ AddEventHandler('qb-shoplifting:server:RewardItem', function(itemToGive)
     print(itemToGive)
     Player.Functions.AddItem(itemToGive, Config.RandomItemAmount)
 end)
+
+RegisterNetEvent('qb-shoplifting:server:sendAlert', function(alertData, streetLabel, coords)
+    TriggerClientEvent("qb-phone:client:addPoliceAlert", -1, alertData)
+end)
