@@ -8,6 +8,66 @@ local completedJob = false
 local firstComplete = false
 
 
+-- FUNCTIONS BEGIN
+
+function IsWearingGloves()
+    local armIndex = GetPedDrawableVariation(PlayerPedId(), 3)
+    local model = GetEntityModel(PlayerPedId())
+    local retval = true
+    --print(armIndex)
+    if model == `mp_m_freemode_01` then
+        if Config.MaleNoGloves[armIndex] ~= nil and Config.MaleNoGloves[armIndex] then
+            retval = false
+        end
+    else
+        if Config.FemaleNoGloves[armIndex] ~= nil and Config.FemaleNoGloves[armIndex] then
+            retval = false
+        end
+    end
+    return retval
+end
+
+IsWearingGloves()
+
+function IsWearingBulletVest()
+    local armIndex = GetPedDrawableVariation(PlayerPedId(), 9)
+    local model = GetEntityModel(PlayerPedId())
+    local retval = true
+
+    if model == `mp_m_freemode_01` then
+        if Config.MaleNoVest[armIndex] ~= nil and Config.MaleNoVest[armIndex] then
+            retval = false
+        end
+    else
+        if Config.FemaleNoNoVest[armIndex] ~= nil and Config.FemaleNoVest[armIndex] then
+            retval = false
+        end
+    end
+    return retval
+end
+
+
+function IsWearingMask()
+    local armIndex = GetPedDrawableVariation(PlayerPedId(), 1)
+    local model = GetEntityModel(PlayerPedId())
+    local retval = true
+    print(armIndex)
+
+    if model == `mp_m_freemode_01` then
+        if Config.MaleNoMask[armIndex] ~= nil and Config.MaleNoMask[armIndex] then
+            retval = false
+        end
+    else
+        if Config.FemaleNoNoMask[armIndex] ~= nil and Config.FemaleNoMask[armIndex] then
+            retval = false
+        end
+    end
+    return retval
+end
+IsWearingMask()
+
+-- END OF FUNCTIONS
+
 -- EVENTS BEGIN
 
 RegisterNetEvent('qb-shoplifting:client:doStuff')
