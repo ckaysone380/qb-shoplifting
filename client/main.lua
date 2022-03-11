@@ -24,6 +24,9 @@ function IsWearingGloves()
             retval = false
         end
     end
+    if armIndex ~= 0 then 
+    QBCore.Functions.Notify(Config.Masks[armIndex], 'primary', 5000)
+end
     return retval
 end
 
@@ -43,6 +46,9 @@ function IsWearingBulletVest()
             retval = false
         end
     end
+    if armIndex ~= 0 then 
+    QBCore.Functions.Notify(Config.Masks[armIndex], 'primary', 5000)
+end
     return retval
 end
 
@@ -58,13 +64,36 @@ function IsWearingMask()
             retval = false
         end
     else
-        if Config.FemaleNoNoMask[armIndex] ~= nil and Config.FemaleNoMask[armIndex] then
+        if Config.FemaleNoMask[armIndex] ~= nil and Config.FemaleNoMask[armIndex] then
             retval = false
         end
     end
+    if armIndex ~= 0 then 
+    QBCore.Functions.Notify(Config.Masks[armIndex], 'primary', 5000)
+end
     return retval
 end
 IsWearingMask()
+
+
+
+-- function tablePrintOut(table)
+--     if type(table) == 'table' then
+--        local s = '\n{ '
+--        for k,v in pairs(table) do
+--           if type(k) ~= 'number' then k = '"'..k..'"' end
+--           s = s .. '['..k..'] = ' .. tablePrintOut(v) .. ',\n'
+--        end
+--        return s .. '}'
+--     else
+--        return tostring(table)
+--     end
+--  end
+
+-- -- example how to trigger it
+
+-- print(tablePrintOut(Config.Masks))
+-- print(Config.Masks)
 
 -- END OF FUNCTIONS
 
