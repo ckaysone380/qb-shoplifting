@@ -5,7 +5,6 @@ author 'Bo Ek#2253'
 description ''
 
 client_scripts {
-    'config.lua',
     'client/*'
 }
 
@@ -14,6 +13,5 @@ server_scripts {
 }
 
 shared_scripts {
-    'config.lua',
-    'locales/en.lua'
+    'config.lua'
 }
