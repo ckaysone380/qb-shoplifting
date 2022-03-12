@@ -6,6 +6,8 @@ Where you can shoplift is configurable and how much you get from shoplifting is 
 This resource uses qb-target
 To make the target work you need to add these following lines in init.lua and Config.TargetModels 
 
+PREVIEW: https://streamable.com/u6ez5i
+
         ["stealing"] = {
             models = {
                 "v_ret_247shelves01",
