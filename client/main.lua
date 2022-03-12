@@ -10,27 +10,6 @@ local firstComplete = false
 
 -- FUNCTIONS BEGIN
 
-function IsWearingGloves()
-    local armIndex = GetPedDrawableVariation(PlayerPedId(), 3)
-    local model = GetEntityModel(PlayerPedId())
-    local retval = true
-    --print(armIndex)
-    if model == `mp_m_freemode_01` then
-        if Config.MaleNoGloves[armIndex] ~= nil and Config.MaleNoGloves[armIndex] then
-            retval = false
-        end
-    else
-        if Config.FemaleNoGloves[armIndex] ~= nil and Config.FemaleNoGloves[armIndex] then
-            retval = false
-        end
-    end
-    if armIndex ~= 0 then 
-    QBCore.Functions.Notify(Config.Masks[armIndex], 'primary', 5000)
-end
-    return retval
-end
-
-IsWearingGloves()
 
 function IsWearingBulletVest()
     local armIndex = GetPedDrawableVariation(PlayerPedId(), 9)
@@ -42,7 +21,7 @@ function IsWearingBulletVest()
             retval = false
         end
     else
-        if Config.FemaleNoNoVest[armIndex] ~= nil and Config.FemaleNoVest[armIndex] then
+        if Config.FemaleNoVest[armIndex] ~= nil and Config.FemaleNoVest[armIndex] then
             retval = false
         end
     end
@@ -73,7 +52,6 @@ function IsWearingMask()
 end
     return retval
 end
-IsWearingMask()
 
 
 
@@ -110,10 +88,11 @@ AddEventHandler('qb-shoplifting:client:doStuff', function(coords)
     streetLabel = streetLabel .. " " .. street2
     end
     local ped = PlayerPedId()
+    local armIndex = GetPedDrawableVariation(PlayerPedId(), 1)
     local alertData = {
         title = "10-33 | Shoplifter",
         coords = coords,
-        description = "Someone Is Trying To Shoplift At "..streetLabel.. " "
+        description = "Someone Is Trying To Shoplift At "..streetLabel.." He Was Wearing A ".. Config.Masks[armIndex].. " He Was Wearing A "..Config.Vests[armIndex],
     }
 
     if GlobalTimer == 0 then
